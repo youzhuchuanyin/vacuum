@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--  <meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>添加界面</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+<div style="background-color: #2aabd2;display: table">
+    <div style="width: 10%;display: table-cell;">
+        <button type="button" class="btn btn-default" style="background-color: #2aabd2">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </button>
+    </div>
+    <div style="width: 80%;display:table-cell;">
+        <p style="padding-left: 100px">已提交<span>0</span>条记录</p>
+    </div>
+    <div style="width: 10%;display: table-cell;">
+        <button type="button" class="btn btn-default" style="background-color: #2aabd2">
+            <span class="glyphicon glyphicon-search"></span>
+        </button>
+    </div>
+</div>
+<div class="container">
+    <div style="display: table;padding-top: 20px">
+        <label style="display: table-cell;padding-left: 10px;padding-right: 38px">罐体:</label>
+        <div class="dropdown ">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width: 240px">
+                选择罐体编号
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </button>
+            <ul class="dropdown-menu " style="width: 240px;">
+                <li><a href="#">罐子1</a></li>
+                <li><a href="#">罐子2</a></li>
+                <li><a href="#">罐子3</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div style="display: table;padding-top: 20px">
+        <label style="display: table-cell;padding-left: 10px;padding-right: 10px">运行设备:</label>
+        <div class="dropdown ">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width: 240px">
+                选择设备编号
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </button>
+            <ul class="dropdown-menu " style="width: 240px;">
+                <li><a href="#">真空机组1</a></li>
+                <li><a href="#">真空机组2</a></li>
+                <li><a href="#">真空机组3</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div style="display: table;padding-top: 20px">
+      <!--  <div style="display: table-cell;padding-left: 10px;padding-right: 10px;">
+            <label>运行时间:</label>
+        </div>-->
+        <label style="display: table-cell;padding-left: 10px;padding-right: 10px;position: static">运行时间:</label>
+
+        <div style="width: 240px;" class="input-group date form_datetime" data-date="1979-09-16T05:25:07Z"
+             data-date-format="dd MM yyyy - HH:ii p">
+            <input class="form-control" type="text" value="">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+        </div>
+
+    </div>
+
+    <div style="display: table;padding-top: 20px">
+        <label style="display: table-cell;padding-left: 10px;padding-right: 10px">三道工序:</label>
+        <div class="dropdown ">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width: 240px">
+                选择工序
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </button>
+            <ul class="dropdown-menu " style="width: 240px;">
+                <li><a href="#">工序1</a></li>
+                <li><a href="#">工序2</a></li>
+                <li><a href="#">工序3</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div style="display: table;padding-top: 20px">
+        <label style="display: table-cell;padding-left: 10px;padding-right: 10px">操作人员:</label>
+        <div class="dropdown ">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width: 240px">
+                选择人员
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </button>
+            <ul class="dropdown-menu " style="width: 240px;">
+                <li><a href="#">000</a></li>
+                <li><a href="#">111</a></li>
+                <li><a href="#">222</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div style="display: table">
+        <div style="padding-left: 90px;padding-top: 100px;display: table-cell">
+            <button type="submit" class="btn btn-default">提交</button>
+        </div>
+        <div style="padding-left: 90px;padding-top: 100px;display: table-cell">
+            <button type="submit" class="btn btn-default">保存</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+<script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        language: "zh",
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1
+    });
+</script>
+</body>
+</html>
