@@ -24,59 +24,23 @@
     <div style="width: 80%;display:table-cell;">
         <p style="padding-left: 100px">已提交<span>0</span>条记录</p>
     </div>
-    <div style="width: 10%;display: table-cell;">
+    <!--<div style="width: 10%;display: table-cell;">
         <button type="button" class="btn btn-default" style="background-color: #2aabd2">
             <span class="glyphicon glyphicon-search"></span>
-        </button>
-    </div>
+        </button>-->
+  <!--  </div>-->
 </div>
 <div class="container">
-    <div style="display: table;padding-top: 20px">
-        <label style="display: table-cell;padding-left: 10px;padding-right: 38px">罐体:</label>
-        <div class="dropdown ">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width: 240px">
-                选择罐体编号
-                <span class="glyphicon glyphicon-chevron-down"></span>
-            </button>
-            <ul class="dropdown-menu " style="width: 240px;">
-                <li><a href="#">罐子1</a></li>
-                <li><a href="#">罐子2</a></li>
-                <li><a href="#">罐子3</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <div style="display: table;padding-top: 20px">
-        <label style="display: table-cell;padding-left: 10px;padding-right: 10px">运行设备:</label>
-        <div class="dropdown ">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width: 240px">
-                选择设备编号
-                <span class="glyphicon glyphicon-chevron-down"></span>
-            </button>
-            <ul class="dropdown-menu " style="width: 240px;">
-                <li><a href="#">真空机组1</a></li>
-                <li><a href="#">真空机组2</a></li>
-                <li><a href="#">真空机组3</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <div style="display: table;padding-top: 20px">
-      <!--  <div style="display: table-cell;padding-left: 10px;padding-right: 10px;">
-            <label>运行时间:</label>
-        </div>-->
-        <label style="display: table-cell;padding-left: 10px;padding-right: 10px;position: static">运行时间:</label>
-
-        <div style="width: 240px;" class="input-group date form_datetime" data-date="1979-09-16T05:25:07Z"
-             data-date-format="dd MM yyyy - HH:ii p">
-            <input class="form-control" type="text" value="">
-            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-        </div>
+    <div style="display: table;padding-top: 10px">
+        <label style="display: table-cell;padding-left: 10px;padding-right: 10px">操作人员:</label>
+        <input type="text" class="form-control"  readonly style="width: 240px">
 
     </div>
-
-    <div style="display: table;padding-top: 20px">
+    <div style="display: table;padding-top: 10px">
+        <label style="display: table-cell;padding-left: 10px;padding-right: 10px">工作罐体:</label>
+        <input type="text" class="form-control"  placeholder="输入罐体编号"style="width: 240px;text-align: center">
+    </div>
+    <div style="display: table;padding-top: 10px">
         <label style="display: table-cell;padding-left: 10px;padding-right: 10px">三道工序:</label>
         <div class="dropdown ">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width: 240px">
@@ -90,27 +54,124 @@
             </ul>
         </div>
     </div>
-
-    <div style="display: table;padding-top: 20px">
-        <label style="display: table-cell;padding-left: 10px;padding-right: 10px">操作人员:</label>
-        <div class="dropdown ">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width: 240px">
-                选择人员
+    <div style="display: table;padding-top: 10px">
+        <label style="display: table-cell;padding-left: 10px;padding-right: 10px">真空机组:</label>
+        <!--<input type="text" class="form-control"  placeholder="真空机组编号"style="width: 240px">-->
+        <div class="dropdown "style="display: table-cell">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width: 200px">
+                选择真空机组
                 <span class="glyphicon glyphicon-chevron-down"></span>
             </button>
-            <ul class="dropdown-menu " style="width: 240px;">
-                <li><a href="#">000</a></li>
-                <li><a href="#">111</a></li>
-                <li><a href="#">222</a></li>
+            <ul class="dropdown-menu " style="width: 200px;">
+                <li><a href="#">真空机组1</a></li>
+                <li><a href="#">真空机组2</a></li>
+                <li><a href="#">真空机组3</a></li>
             </ul>
         </div>
+        <button class="btn btn-default glyphicon glyphicon-qrcode"style="display: table-cell;"></button>
+
+    </div>
+    <div style="display: table;padding-top: 10px">
+        <label style="display: table-cell;padding-left: 10px;padding-right: 10px">内加热炉:</label>
+       <!-- <input type="text" class="form-control"  placeholder="内加热炉编号"style="width: 240px">-->
+        <div class="dropdown "style="display: table-cell">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width: 200px">
+                选择内加热炉
+                <span class="glyphicon glyphicon-chevron-down"></span>
+
+            </button>
+            <ul class="dropdown-menu " style="width: 200px;">
+                <li><a href="#">内加热炉1</a></li>
+                <li><a href="#">内加热炉2</a></li>
+                <li><a href="#">内加热炉3</a></li>
+            </ul>
+        </div>
+        <button class="btn btn-default glyphicon glyphicon-qrcode"style="display: table-cell;"></button>
+    </div>
+    <div style="display: table;padding-top: 10px">
+        <label style="display: table-cell;padding-left: 10px;padding-right: 10px">外加热炉:</label>
+        <!-- <input type="text" class="form-control"  placeholder="内加热炉编号"style="width: 240px">-->
+        <div class="dropdown "style="display: table-cell">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width: 200px">
+                选择外加热炉
+                <span class="glyphicon glyphicon-chevron-down"></span>
+
+            </button>
+            <ul class="dropdown-menu " style="width: 200px;">
+                <li><a href="#">外加热炉1</a></li>
+                <li><a href="#">外加热炉2</a></li>
+                <li><a href="#">外加热炉3</a></li>
+            </ul>
+        </div>
+        <button class="btn btn-default glyphicon glyphicon-qrcode"style="display: table-cell;"></button>
     </div>
 
+    <div style="display: table;padding-top: 10px">
+        <label style="display: table-cell;padding-left: 10px;padding-right: 10px">氮气置换:</label>
+        <!-- <input type="text" class="form-control"  placeholder="内加热炉编号"style="width: 240px">-->
+        <div class="dropdown "style="display: table-cell">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width: 200px">
+                选择氮气置换
+                <span class="glyphicon glyphicon-chevron-down"></span>
+
+            </button>
+            <ul class="dropdown-menu " style="width: 200px;">
+                <li><a href="#">氮气置换1</a></li>
+                <li><a href="#">氮气置换2</a></li>
+                <li><a href="#">氮气置换3</a></li>
+            </ul>
+        </div>
+        <button class="btn btn-default glyphicon glyphicon-qrcode"style="display: table-cell;"></button>
+    </div>
+    <div style="display: table;padding-top: 10px">
+        <label style="display: table-cell;padding-left: 10px;padding-right: 24px;">检漏仪:</label>
+        <!-- <input type="text" class="form-control"  placeholder="内加热炉编号"style="width: 240px">-->
+        <div class="dropdown "style="display: table-cell">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width: 200px">
+                选择检漏仪
+                <span class="glyphicon glyphicon-chevron-down"></span>
+
+            </button>
+            <ul class="dropdown-menu " style="width: 200px;">
+                <li><a href="#">检漏仪1</a></li>
+                <li><a href="#">检漏仪2</a></li>
+                <li><a href="#">检漏仪3</a></li>
+            </ul>
+        </div>
+        <button class="btn btn-default glyphicon glyphicon-qrcode"style="display: table-cell;"></button>
+    </div>
+
+    <div style=" padding-top: 10px ;padding-left: 10px">
+      <!--  <div style="display: table-cell;padding-left: 10px;padding-right: 10px;">
+            <label>运行时间:</label>
+        </div>-->
+        <table style="margin-bottom: 0px">
+            <tr >
+        <td><label style="padding-right: 10px;padding-top: 5px">开始时间:</label></td>
+
+        <td><div style="width: 240px; " class="input-group date form_datetime" data-date="1979-09-16T05:25:07Z"
+             data-date-format="dd MM yyyy - HH:ii p">
+            <input class="form-control" type="text" value="">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+            </div>
+        </td>
+            </tr>
+        </table>
+    </div>
+
+    <div style="display: table;padding-top: 10px">
+        <label style="display: table-cell;padding-left: 10px;padding-right: 10px">结束时间:</label>
+        <input type="text" class="form-control"  readonly style="width: 240px">
+
+    </div>
+
+
     <div style="display: table">
-        <div style="padding-left: 90px;padding-top: 100px;display: table-cell">
+        <div style="padding-left: 90px;padding-top: 10px;display: table-cell">
             <button type="submit" class="btn btn-default">提交</button>
         </div>
-        <div style="padding-left: 90px;padding-top: 100px;display: table-cell">
+        <div style="padding-left: 90px;padding-top: 10px;display: table-cell">
             <button type="submit" class="btn btn-default">保存</button>
         </div>
     </div>
