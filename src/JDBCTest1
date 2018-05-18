@@ -1,0 +1,72 @@
+package com.jikexueyuan.jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.mysql.jdbc.Statement;
+
+public class JDBCTest1 {
+	
+	public static  Connection getConnection() {
+		java.sql.Connection connect =null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connect=DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8", "root", "123456");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return connect;
+	}
+	
+	public static void insert() {
+		Connection connect=getConnection();
+		String sql = "insert into vacuum (id,opra_man) values('3','刘集')";
+		try {
+			java.sql.Statement state=connect.createStatement();
+			int count=state.executeUpdate(sql);
+			System.out.println("插入了"+count+"条数据");
+			connect.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void update() {
+		Connection connect=getConnection();
+		String sql = "update vacuum set opra_man='刘丽'where id='2'";
+		try {
+			java.sql.Statement state=connect.createStatement();
+			int count=state.executeUpdate(sql);
+			System.out.println("更新了"+count+"条数据");
+			connect.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+}
+	public static void delete() {
+		Connection connect=getConnection();
+		String sql = "delete from vacuum where opra_man='刘丽'";
+		try {
+			java.sql.Statement state=connect.createStatement();
+			int count=state.executeUpdate(sql);
+			System.out.println("删除了"+count+"条数据");
+			connect.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public static void main(String[] args) {
+		
+//		insert();
+//		update();
+		delete();
+		
+	}
+}
