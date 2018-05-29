@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--  <meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>添加界面</title>
+    <link href="bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+	
+    <script type="text/javascript" src="jquery-1.11.1.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="bootstrap.min.js"></script>
+	<script>
+		function back(){
+			window.location.href="index.html"  ;
+		}
+	</script>
+
+</head>
+<body>
+<div style="background-color: #2aabd2;display: table">
+    <div style="width: 10%;display: table-cell;">
+        <button type="button" class="btn btn-default" style="background-color: #2aabd2;border:none"onclick="back()">
+            <span><img src="icon_back.png"style="width:18px;height:20px"></img></span>
+        </button>
+    </div>
+    <div style="width: 80%;display:table-cell;">
+        <p style="padding-left: 75px">已提交<span>0</span>条记录</p>
+    </div>
+    <!--<div style="width: 10%;display: table-cell;">
+        <button type="button" class="btn btn-default" style="background-color: #2aabd2">
+            <span class="glyphicon glyphicon-search"></span>
+        </button>-->
+  <!--  </div>-->
+</div>
+
+    <table style="margin-top: 15px">
+        <tr>
+        <td style="padding-top:7px"><label style="padding-left: 10px;padding-right: 10px;">操作人员:</label></td>
+        <td><input type="text" class="form-control"  readonly style="width: 220px"></td>
+		</tr>
+    </table>
+        <div style=" padding-top: 15px ;padding-left: 10px">
+      <!--  <div style="display: table-cell;padding-left: 10px;padding-right: 10px;">
+            <label>运行时间:</label>
+        </div>-->
+        <table style="margin-bottom: 0px">
+            <tr >
+        <td><label style="padding-right: 10px;padding-top: 5px">开始时间:</label></td>
+
+        <td><div style="width: 217px; " class="input-group date form_datetime" data-date="1979-09-16T05:25:07Z"
+             data-date-format="dd MM yyyy - HH:ii p">
+            <input class="form-control" type="text" value="">
+            <span class="input-group-addon"><img src="close.png"style="width:18px;height:20px;"></img></span>
+            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+            </div>
+        </td>
+            </tr>
+        </table>
+    </div>
+
+    
+<table style="margin-top: 15px">
+        <tr>
+        <td style="padding-top:7px"><label style="padding-left: 10px;padding-right: 10px;">结束时间:</label></td>
+        <td><input type="text" class="form-control"  readonly style="width: 220px"></td>
+		</tr>
+    </table>
+    <table style="margin-top: 15px">
+        <tr> 
+        <td style="padding-top:7px"><label style="padding-left: 10px;padding-right: 10px">工作罐体:</label></td>
+        <td><input type="text" class="form-control"  placeholder="输入罐体编号"style="width: 220px;text-align: center"></td>
+		</tr>
+    </table>
+    <div style="display: table;padding-top: 15px">
+        <label style="display: table-cell;padding-left: 10px;padding-right: 10px">三道工序:</label>
+        <div class="dropdown ">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width: 220px">
+                选择工序
+                <span><img src="down1.png"style="width:18px;height:20px"></img></span>
+            </button>
+            <ul class="dropdown-menu " style="width: 220px;">
+                <li><a href="#">工序1</a></li>
+                <li><a href="#">工序2</a></li>
+                <li><a href="#">工序3</a></li>
+            </ul>
+        </div>
+    </div>
+    <div style="display: table;padding-top: 15px">
+        <label style="display: table-cell;padding-left: 10px;padding-right: 10px">真空机组:</label>
+        <!--<input type="text" class="form-control"  placeholder="真空机组编号"style="width: 240px">-->
+        <div class="dropdown "style="display: table-cell">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width: 180px;">
+                选择真空机组
+                <span><img src="down1.png"style="width:18px;height:20px"></img></span>
+            </button>
+            <ul class="dropdown-menu " style="width: 180px;">
+                <li><a href="#">真空机组1</a></li>
+                <li><a href="#">真空机组2</a></li>
+                <li><a href="#">真空机组3</a></li>
+            </ul>
+        </div>
+        <button style="display: table-cell;border:none"><img src="erweima.png"style="width:25px;height:25px"></img></button>
+
+    </div>
+    <div style="display: table;padding-top: 15px">
+        <label style="display: table-cell;padding-left: 10px;padding-right: 10px">内加热炉:</label>
+       <!-- <input type="text" class="form-control"  placeholder="内加热炉编号"style="width: 240px">-->
+        <div class="dropdown "style="display: table-cell">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width: 180px">
+                选择内加热炉
+                <span><img src="down1.png"style="width:18px;height:20px"></img></span>
+
+            </button>
+            <ul class="dropdown-menu " style="width: 180px;">
+                <li><a href="#">内加热炉1</a></li>
+                <li><a href="#">内加热炉2</a></li>
+                <li><a href="#">内加热炉3</a></li>
+            </ul>
+        </div>
+        <button style="display: table-cell;border:none"><img src="erweima.png"style="width:25px;height:25px"></img></button>
+    </div>
+    <div style="display: table;padding-top: 15px">
+        <label style="display: table-cell;padding-left: 10px;padding-right: 10px">外加热炉:</label>
+        <!-- <input type="text" class="form-control"  placeholder="内加热炉编号"style="width: 240px">-->
+        <div class="dropdown "style="display: table-cell">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width: 180px">
+                选择外加热炉
+                <span><img src="down1.png"style="width:18px;height:20px"></img></span>
+
+            </button>
+            <ul class="dropdown-menu " style="width: 180px;">
+                <li><a href="#">外加热炉1</a></li>
+                <li><a href="#">外加热炉2</a></li>
+                <li><a href="#">外加热炉3</a></li>
+            </ul>
+        </div>
+        <button style="display: table-cell;border:none"><img src="erweima.png"style="width:25px;height:25px"></img></button>
+    </div>
+
+    <div style="display: table;padding-top: 15px">
+        <label style="display: table-cell;padding-left: 10px;padding-right: 10px">氮气置换:</label>
+        <!-- <input type="text" class="form-control"  placeholder="内加热炉编号"style="width: 240px">-->
+        <div class="dropdown "style="display: table-cell">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width: 180px">
+                选择氮气置换
+                <span><img src="down1.png"style="width:18px;height:20px"></img></span>
+
+            </button>
+            <ul class="dropdown-menu " style="width: 180px;">
+                <li><a href="#">氮气置换1</a></li>
+                <li><a href="#">氮气置换2</a></li>
+                <li><a href="#">氮气置换3</a></li>
+            </ul>
+        </div>
+        <button style="display: table-cell;border:none"><img src="erweima.png"style="width:25px;height:25px"></img></button>
+    </div>
+    <div style="display: table;padding-top: 15px">
+        <label style="display: table-cell;padding-left: 10px;padding-right: 24px;">检漏仪:</label>
+        <!-- <input type="text" class="form-control"  placeholder="内加热炉编号"style="width: 240px">-->
+        <div class="dropdown "style="display: table-cell">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width: 180px">
+                选择检漏仪
+                <span><img src="down1.png"style="width:18px;height:20px"></img></span>
+            </button>
+            <ul class="dropdown-menu " style="width: 180px;">
+                <li><a href="#">检漏仪1</a></li>
+                <li><a href="#">检漏仪2</a></li>
+                <li><a href="#">检漏仪3</a></li>
+            </ul>
+        </div>
+        <button style="display: table-cell;border:none"><img src="erweima.png"style="width:25px;height:25px"></img></button>
+    </div>
+
+
+
+    <div style="display: table">
+        <div style="padding-left: 60px;padding-top: 10px;display: table-cell">
+            <button type="submit" class="btn btn-default">提交</button>
+        </div>
+        <div style="padding-left: 90px;padding-top: 10px;display: table-cell">
+            <button type="submit" class="btn btn-default">保存</button>
+        </div>
+    </div>
+
+<script type="text/javascript" src="bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+<script src="bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        language: "zh",
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1
+    });
+</script>
+</body>
+</html>

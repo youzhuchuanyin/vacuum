@@ -1,0 +1,67 @@
+<!-- HTML5文件 -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<title>Agile Lite Simple Template</title>
+		<link rel="stylesheet" href="../../script/assets/agile/css/agile.layout.css">
+		<link rel="stylesheet" href="../../script/assets/agile/css/ratchet/css/ratchet.min.css">
+		<link rel="stylesheet" href="../../script/assets/app/css/app.css">
+		<link rel="stylesheet" href="../../script/assets/third/simple_template/css/simple_template.css" />
+		<link rel="stylesheet" href="../../script/assets/third/icomoon/style.css" />
+		<link rel="stylesheet" href="bootstrap.min.css" />
+		<script src="res:script/exmobijs/app.js"/>
+		<script src="res:script/exmobijs/base.js"/>
+        <script src="res:script/exmobijs/utility.js"/>
+        <script src="res:script/exmobijs/date.js"/>
+	<script>
+	<![CDATA[
+	var userFullCode = window.getNativeParameter("username");//手机基座的用户名
+	userFullCode='010100601173';
+		window.setStringSession("userFullCode", userFullCode);
+		//12位工号
+		function init(){
+			//获取员工权限
+		}
+	]]>
+	</script>
+    <script src="jquery-1.11.1.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <script>
+    	function add(){
+    		 window.location.href="add.html"  ;
+    	}
+    	function find(){
+    		 window.location.href="find.html"  ;
+    	}
+    </script>
+	</head>
+	<body>
+		<div style="background-color: #2aabd2;display: table;">
+    <div style="width: 10%;display: table-cell;">
+        <button type="button" class="btn btn-default" style="background-color: #2aabd2;border:none">
+            <span><img src="home.png"style="width:18px;height:20px"></img></span>
+        </button>
+    </div>
+    <div style="width: 80%;display:table-cell;">
+        <span style="padding-left: 90px;font-size:16px;">抽真空</span>
+    </div>
+</div>
+<div style="background-color: #ffffff;display: table">
+    <div  style="padding-top: 30px;padding-left: 40px;display: table-cell">
+        <button  style="width: 63px;height: 63px;background-color: #67b168"class="btn btn-default"onclick="add()">
+            <span><img src="add.png"style="width:20px;height:20px"></img></span>
+        </button>
+        <p style="padding-left:17px">添加</p>
+
+    </div>
+    <div  style="padding-top: 30px;padding-left: 40px;display: table-cell">
+        <button  style="width: 63px;height: 63px;background-color: #67b168"class="btn btn-default"onclick="find()">
+            <span><img src="search.png"style="width:20px;height:20px"></img></span>
+        </button>
+        <p style="padding-left:17px">查询</p>
+    </div>
+</div>
+	</body>
+</html>
