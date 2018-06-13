@@ -1,0 +1,69 @@
+<cdf>
+	<id>skin-default</id>
+	<name>扁平风格</name>
+	<description>以扁平风格为主的皮肤</description>
+	<date>2014-04-23</date>
+	<vendor url="http://nj.www.fiberhome.com.cn" email="support@nj.fiberhome.com.cn">fiberhome</vendor>
+	<setting>
+		<!-- 公共样式 -->
+		<attrs/>
+		<body background-color="white"/>
+		<header background-color="white"/>
+		<hr border-color="#d8d8d8"/>
+		
+		<!-- 表单控件 -->
+		<a color="#2371af" color-focus="#12537f"/>
+		<font>
+			<txt-left width="30%"/>
+		</font>
+		<listitem-checkbox border-radius="16" border-color="white" border-size="0" overlay="theme:image/icon/check.png,theme:image/icon/checked.png" background-color="transparent"/>
+		<checkbox border-color="" border-size="0" overlay="theme:image/icon/checkbox.png,theme:image/icon/checkbox_c.png" background-color="transparent"/>
+		<radio border-color="white" border-size="0" overlay="theme:image/icon/rdo.png,theme:image/icon/rdo_current.png" background-color="transparent"/>
+		<file icon="theme:image/icon/floder.png" button-background-color="transparent" overlay="none" overlay-click="none"/>
+		<camera icon="theme:image/icon/camera.png" button-background-color="transparent" overlay="none" overlay-click="none"/>
+		<decode icon="theme:image/icon/decode.png" button-background-color="transparent" overlay="none" overlay-click="none"/>
+		<date icon="theme:image/icon/date.png" button-background-color="transparent" overlay="none" overlay-click="none"/>
+		<time icon="theme:image/icon/time.png" button-background-color="transparent" overlay="none" overlay-click="none"/>
+		<select icon="theme:image/icon/select.png" button-background-color="transparent" overlay="none" overlay-click="none"/>
+		<eselect icon="theme:image/icon/select.png" button-background-color="transparent" overlay="none" overlay-click="none"/>
+		
+		<text>
+			<txt-left width="30%" border-size="0" height="40" padding="0 4" background-color="transparent"/>
+			<txt-right width="70%" border-size="0" height="40" padding="0 8"/>
+		</text>
+
+		<!-- 导航控件 -->
+		<titlebar overlay="none" icon="theme:image/titlebar/icon_back.png" clickicon="theme:image/titlebar/icon_back_c.png" title-color="#000000" background-color="#F8F8F8"/>
+		<tabbar tab-background-color="white" tab-background-current-color="white" color="#9c9c9c" current-color="#d0312b" border-color="#dddddd" border-current-color="#d0312b" tabtype="slide"/>
+		
+		<listitem-one background-click-color="#f1f1f1" sndcolor="#aaaaaa" rcolor="#aaaaaa" border-color="#d8d8d8">
+			<no-click background-click-color="transparent"/>
+			<current background-color="#f1f1f1"/>
+		</listitem-one>
+		<listitem-two background-click-color="#f1f1f1" sndcolor="#aaaaaa" rcolor="#aaaaaa" border-color="#d8d8d8">
+			<no-click background-click-color="transparent"/>
+			<current background-color="#f1f1f1"/>
+		</listitem-two>
+		<toggle background-click-color="#f1f1f1" color="#000000" sndcolor="#aaaaaa" rcolor="#aaaaaa" border-color="#DADADD"/>
+		<fileset title-background-color="#F8F8F8" title-color="#000000" background-color="#FFFFFF" background-click-color="#f1f1f1" title-icon="theme:image/filetype/attach.png" folder_icon="theme:image/filetype/folder.png" txt_icon="theme:image/filetype/txt.png" pic_icon="theme:image/filetype/img.png" pdf_icon="theme:image/filetype/pdf.png" xls_icon="theme:image/filetype/excel.png" zip_icon="theme:image/filetype/zip.png" audio_icon="theme:image/filetype/audio.png" video_icon="theme:image/filetype/video.png" ppt_icon="theme:image/filetype/ppt.png" doc_icon="theme:image/filetype/word.png" other_icon="theme:image/filetype/unknow.png" txt-icon="theme:image/filetype/txt.png"/>
+
+		<!-- 布局控件 -->
+		<div>
+			<menubar background-color="#d8d8d8" text-align="center" height="48" text-valign="middle" color="white"/>
+			<menu border-radius="4" background-color="#2371af" background-click-color="#12537f" text-align="center" text-valign="middle" width="50%" height="36" color="white" margin="0 8"/>
+		</div>
+		
+		<!-- 按钮 -->
+		<button height="50" margin="4" padding="0 4" background-color="#F8F8F8" background-click-color="#f1f1f1" color="#d0312b" click-color="#861C18"  border-color="#d0312b" border-size="1"  text-align="center" overlay="none" overlay-click="none" text-valign="middle" border-radius="6">
+			<valibtn background-color="#ffa304" background-click-color="#e37e18"/>
+		</button>
+		
+		<!-- 弹出框 -->
+		<alert border-color="#9c9c9c" border-size="0" title-background-color="#2371af" title-color="#ffffff"/>
+		<dialog border-color="#9c9c9c" border-size="0" title-background-color="#2371af" title-color="#ffffff"/>
+		<popmenu title-background-color="#2371af" title-color="#ffffff" background-color="#f8f8f8" background-click-color="#e8e8e8" color=" #333333"/>
+		
+		<tree font-size="16dp" iconopen="theme:image/tree/icon_collapse.png" iconclose="theme:image/tree/icon_expand.png" iconleaf="theme:image/tree/icon_user.png" />
+		
+	</setting>
+</cdf>

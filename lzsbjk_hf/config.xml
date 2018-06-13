@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config scope="client" clientversion="4" devicetype="all" theme="skin-crrc">
+  <appid>lzsbjk_hf</appid>
+  <appname>冷智设备监控</appname>
+  <description>添加二维码,解决乱码问题</description>
+  <version>1.0.1</version>
+  <date>2017-11-20</date>
+  <homepage src="res:page/home.uixml"/>
+  <faultconfig src=""/>
+  <access network="true" gps="true" camera="true" certificate="true" land="false" orientation="port"/>
+  <vendor email="" url=""/>
+  <icon main="res:image/main.png" logo="res:image/logo.png"/>
+</config>

@@ -1,0 +1,32 @@
+﻿<!-- ExMobi UIXML(XHTML)文件 -->
+<html>
+	<head>
+		<meta content="charset=utf-8"/>
+		<title show="false"/>
+		<link rel="stylesheet" type="text/css" href="res:css/global.css" />
+		<script src="res:script/exmobijs/app.js"/>
+		<script src="res:script/exmobijs/base.js"/>
+        <script src="res:script/exmobijs/utility.js"/>
+        <script src="res:script/exmobijs/date.js"/>
+<script>
+	<![CDATA[
+	var userFullCode = window.getNativeParameter("username");
+	userFullCode='601173';
+		window.setStringSession("userFullCode", userFullCode);
+		//12位工号
+		function init(){
+			//获取员工权限
+		}
+	]]>
+		</script>
+	</head>
+	<header>
+		<titlebar title="主页" icon="theme:image/icon/home.png"hidericon="true" iconhref="script:close"/>
+	</header>
+	<body>
+		<div id="main">
+			<listitem type="oneline" caption="新增工序" href="res:page/shebei_add.uixml" icon='theme:image/icon/add.png'></listitem>
+			<listitem type="oneline" caption="工序列表" href="res:page/shebei_list.uixml" icon='theme:image/icon/form.png'></listitem>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,216 @@
+<!-- ExMobi UIXML(XHTML)文件 -->
+<html>
+	<head>
+		<meta content="charset=utf-8"/>
+		<title show="false"/>
+		<link rel="stylesheet" type="text/css" href="res:css/global.css" />
+		<script src="res:script/exmobijs/app.js"/>
+		<script src="res:script/exmobijs/base.js"/>
+        <script src="res:script/exmobijs/utility.js"/>
+        <script src="res:script/exmobijs/date.js"/>
+        
+<script>
+	<![CDATA[
+	var selectObjzk = document.getElementById("zkcode");
+	var selectObjnh = document.getElementById("nhcode");
+	var selectObjwh = document.getElementById("whcode");
+	var selectObjn2 = document.getElementById("n2code");
+	var selectObjjl = document.getElementById("jlcode");
+	var selectObjyd = document.getElementById("ydcode");
+	var userFullCode = window.getStringSession("userFullCode");
+	//主函数
+	function init() {
+		     $("time").val(timeStamp2String());
+		       $("operator").val(userFullCode);
+	    }
+	//日期处理函数
+	function timeStamp2String(){  
+	    var datetime = new Date();  
+	    var year = datetime.getFullYear();  
+	    var month = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;  
+	    var date = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();  
+	    var hour = datetime.getHours()< 10 ? "0" + datetime.getHours() : datetime.getHours();  
+	    var minute = datetime.getMinutes()< 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();  
+	    var second = datetime.getSeconds()< 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();  
+	    return year + "/" + month + "/" + date+" "+hour+":"+minute+":"+second; 
+    }  
+    //向服务器发送请求
+    function addActivity() {
+		var date = timeStamp2String();//实时
+		var time = $("time").val();//输入时间
+		var Boxcode = $("Boxcode").val();//罐箱
+		var Workprocedure = $("Workprocedure").val();//工序
+		var status = "start";//状态
+		var operatorName ="黄菲";//操作人员
+		var operator=$("operator").val();//操作人员ID
+		var active="0";//一轮
+		var zkcode = $("zkcode").val();//真空机组
+		var nhcode = $("nhcode").val();//内加热
+		var whcode = $("whcode").val();//外加热
+		var n2code = $("n2code").val();//氮气置换
+		var jlcode = $("jlcode").val();//捡漏
+		var ydcode = $("ydcode").val();//移动真空
+		if(Boxcode == ""){
+			alert("罐箱编码不能为空！！！");
+			return;
+		}
+		if(Workprocedure == ""){
+			alert("工序号不能为空！！！");
+			return;
+		}
+		if(zkcode == ""){
+			alert("真空机组不能为空！！！");
+			return;
+		}
+		data = "flag=insert&date=" +date+"&time=" +time+"&status=" +status+"&operator="+operator+"&active=" +active+"&Boxcode="+Boxcode+"&operatorName=" +encodeURI(encodeURI(operatorName))+"&Workprocedure="+Workprocedure+"&zkcode="+zkcode+"&nhcode="+nhcode+"&whcode="+whcode+"&n2code="+n2code+"&jlcode="+jlcode+"&ydcode="+ydcode;
+		$a.go("http://erpserver/com/appapi.jsp", "post", data, addActivity_success, failFunction, '{"Content-Type":"application/x-www-form-urlencoded; charset=utf-8","Accept-Language":"zh-cn"}', false);
+	}
+    //得到服务器返回内容
+    function addActivity_success(data) {
+		var content = eval("(" + data.responseText + ")");
+		if (content.length > 0) {
+			for ( i = 0; i < content.length; i++) {
+				var msgCode = content[i].msgCode;
+				if(msgCode =="1"){
+				 alert("新增成功！！！");
+				}
+				else if (msgCode =="0"){
+				 alert("数据库新增失败！！！");
+                }
+				else {alert("该记录已存在，请核实！！！");}
+	       }
+		} else {
+			alert("服务器无响应！！！");
+		}
+	}
+	
+	function failFunction(data) {
+		alert("服务器异常，请求数据失败。");
+	}
+	
+	function bind(){
+		switch(selectObjzk.options[selectObjzk.selectedIndex].value){
+			case "zk001":
+       			selectObjnh.selectedIndex = 0;
+       			selectObjwh.selectedIndex = 0;
+       			selectObjn2.selectedIndex = 0;
+       			selectObjjl.selectedIndex = 0;
+       			selectObjyd.selectedIndex = 0;
+			 break;
+			case "zk002":
+       			selectObjnh.selectedIndex = 1;
+       			selectObjwh.selectedIndex = 1;
+       			selectObjn2.selectedIndex = 1;
+       			selectObjjl.selectedIndex = 1;
+       			selectObjyd.selectedIndex = 1;
+			 break;
+			case "zk003":
+       			selectObjnh.selectedIndex = 2;
+       			selectObjwh.selectedIndex = 2;
+       			selectObjn2.selectedIndex = 2;
+       			selectObjjl.selectedIndex = 2;
+       			selectObjyd.selectedIndex = 2;
+			 break;
+		}
+	}
+	
+	]]>
+		</script>
+	</head>
+	<header>
+		<titlebar id="titlebarid" title="活动增加"  hidericon="true"iconhref="script:close"/>
+	</header>
+	<body onload="init();">
+		<div id="main"></div>
+		<div id="Box_code" style="display: inline;width:30%;">罐箱编码：</div>
+          <input type="text" style="width:70%" hideborder="false"  id="Boxcode" ></input>
+       <br/>
+       <div id="Work_procedure" style="display: inline;width:30%;">工      序：</div>
+	     <select id="Workprocedure" style="width:70%">
+            <option value="GX001">GX001</option>
+            <option value="GX002">GX002</option>
+            <option value="GX003">GX003</option>
+         </select>
+       <br/>
+			<div id="ZK_CODE" style="display: inline;width:30%;">真空机组：</div>
+		  	<select id="zkcode" style="width:57%;" onchange="bind()">
+            	<option value="zk001">zk001</option>
+            	<option value="zk002">zk002</option>
+            	<option value="zk003">zk003</option>
+          	</select>
+          	<input type="decode" id="ZK_DECODE" name=""style="width:13%;height:33px;display:inline"></input>
+		
+       <br/>
+      <div id="NH_CODE" style="display: inline;width:30%;">内加热炉：</div>
+		  	<select id="nhcode" style="width:57%;">
+            	<option value="nh001">nh001</option>
+            	<option value="nh002">nh002</option>
+            	<option value="nh003">nh003</option>
+            	<option value="">不使用</option>
+          	</select>
+          	<input type="decode" id="NH_DECODE" name=""style="width:13%;height:33px;display:inline"></input>
+		
+       <br/>
+        <div id="WH_CODE" style="display: inline;width:30%;">外加热炉：</div>
+		  	<select id="whcode" style="width:57%;">
+            	<option value="wh001">wh001</option>
+            	<option value="wh002">wh002</option>
+            	<option value="wh003">wh003</option>
+            	<option value="">不使用</option>
+          	</select>
+          	<input type="decode" id="WH_DECODE" name=""style="width:13%;height:33px;display:inline"></input>
+		
+       <br/>
+       <div id="N2_CODE" style="display: inline;width:30%;">氮气置换：</div>
+		  	<select id="n2code" style="width:57%;">
+            	<option value="n2001">n2001</option>
+            	<option value="n2002">n2002</option>
+            	<option value="n2003">n2003</option>
+            	<option value="">不使用</option>
+          	</select>
+          	<input type="decode" id="N2_DECODE" name=""style="width:13%;height:33px;display:inline"></input>
+		
+       <br/>
+       <div id="JL_CODE" style="display: inline;width:30%;">检漏设备：</div>
+		  	<select id="jlcode" style="width:57%;">
+            	<option value="jl001">jl001</option>
+            	<option value="jl002">jl002</option>
+            	<option value="jl003">jl003</option>
+            	<option value="">不使用</option>
+          	</select>
+          	<input type="decode" id="JL_DECODE" name=""style="width:13%;height:33px;display:inline"></input>
+		
+       <br/>
+       <div id="yd_CODE" style="display: inline;width:30%;">真空检测：</div>
+		  	<select id="ydcode" style="width:57%;">
+            	<option value="yd001">yd001</option>
+            	<option value="yd002">yd002</option>
+            	<option value="yd003">yd003</option>
+            	<option value="">不使用</option>
+          	</select>
+          	<input type="decode" id="yd_DECODE" name=""style="width:13%;height:33px;display:inline"></input>
+		
+       <br/>
+       <div id="START_TIME" style="display: inline;width:30%;">开始时间：</div>
+          <input type="text" style="width:70%" hideborder="false"  id="time"value=""></input>
+       <br/>
+     
+       <div id="OPERATOR" style="display: inline;width:30%;">操作人员：</div>
+          <input type="text" style="width:70%" hideborder="false"  id="operator"prompt="黄菲 " ></input>
+       <br/>
+       
+       <!--<div id="Status" style="display: inline;width:30%;">状     态：</div>
+           <select id="STatus" name="STatus"  onchange="initStatus();">
+          	<option value="0">请选择状态</option></select>
+         <select id="STatus" style="width:70%">
+            <option value="0">新增</option>
+            <option value="1">运行</option>  
+         </select>-->
+          <!--<input type="text" style="width:70%" hideborder="false"  id="STatus" ></input> -->
+       <br/>
+	</body>
+	<footer>
+          <input type="submit" value="新         增" onclick="addActivity()" style="width:60%;align:center;"></input>
+    </footer>
+	
+</html>

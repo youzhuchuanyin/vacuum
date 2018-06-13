@@ -1,0 +1,891 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			targetNamespace="http://www.nj.fiberhome.com.cn/map"
+			xmlns:fh="http://www.nj.fiberhome.com.cn/map" 
+			elementFormDefault="qualified"> 
+	
+	<!-- 根节点 -->
+	<xsd:element name="maxml">
+	   <xsd:complexType>
+	      <xsd:sequence>
+	         <xsd:group ref="fh:maxmlGroup"  minOccurs="0" maxOccurs="unbounded"/>
+	      </xsd:sequence>
+	      <xsd:attribute name="version" type="xsd:string" fixed="2.0" use="required">
+	      </xsd:attribute>
+	   </xsd:complexType>
+	   <xsd:unique name="baseaddr">
+			<xsd:selector xpath="fh:route"></xsd:selector>
+			<xsd:field xpath="@baseaddr"></xsd:field>
+		</xsd:unique>
+	</xsd:element>
+	
+	<!-- maxml子节点组 -->
+	<xsd:group name="maxmlGroup">
+		<xsd:choice>
+			<xsd:element name="route" type="fh:routeType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:unique name="pattern">
+					<xsd:selector xpath="fh:forward"></xsd:selector>
+					<xsd:field xpath="@pattern"></xsd:field>
+				</xsd:unique>
+			</xsd:element>
+	      	<xsd:element name="config" type="fh:configType" minOccurs="0" maxOccurs="1">
+	      		<xsd:unique name="mimetype">
+					<xsd:selector xpath="fh:mimetype"></xsd:selector>
+					<xsd:field xpath="@contenttype"></xsd:field>
+				</xsd:unique>
+				<xsd:unique name="domain">
+					<xsd:selector xpath="fh:domain"></xsd:selector>
+					<xsd:field xpath="@name"></xsd:field>
+				</xsd:unique>
+				<xsd:unique name="customparam">
+					<xsd:selector xpath="fh:customparam"></xsd:selector>
+					<xsd:field xpath="@name"></xsd:field>
+				</xsd:unique>
+				<xsd:unique name="database">
+					<xsd:selector xpath="fh:database"></xsd:selector>
+					<xsd:field xpath="@id"></xsd:field>
+				</xsd:unique>
+	      	</xsd:element>
+	      	<xsd:element name="pushchannels" type="fh:pushchannelsType" minOccurs="0" maxOccurs="1">
+	      		<xsd:unique name="pushchannel">
+					<xsd:selector xpath="fh:pushchannel"></xsd:selector>
+					<xsd:field xpath="@id"></xsd:field>
+				</xsd:unique>
+	      	</xsd:element>
+	      	<xsd:element name="services" type="fh:ServiceType" minOccurs="0" maxOccurs="1"/>
+		</xsd:choice>
+	</xsd:group>
+	
+	<!-- 路由配置 -->
+	<xsd:complexType name="routeType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="zh">
+				转向路由
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="forward" type="fh:forwardType" maxOccurs="unbounded" minOccurs="0" >
+				
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="baseaddr" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					目标转向前缀地址
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+	<!-- 跳转forward节点 -->
+	<xsd:complexType name="forwardType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="zh">
+				forward跳转指向
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="pattern" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					目标转向相对地址
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="path" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					指定的跳转页面
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="name" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					forward的名字
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="desc" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					forward的描述
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="method" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					forward的请求方式
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+	<!-- 推送节点 -->
+	<xsd:complexType name="pushchannelsType">
+		<xsd:sequence>
+			<xsd:element name="pushchannel" type="fh:pushchannelType" maxOccurs="unbounded" minOccurs="0"/>
+		</xsd:sequence>	
+		<xsd:attribute name="authpage" type="xsd:string" >
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					鉴权页面
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+	<xsd:complexType name="pushchannelType">
+		<xsd:annotation>
+			<xsd:documentation>
+				推送频道配置
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:all>
+			<xsd:element name="cron" type="fh:cronType"  maxOccurs="1" minOccurs="0"/>
+		</xsd:all>
+		<xsd:attribute name="id" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					推送频道唯一标识
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="name" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					推送频道名称
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="description" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					频道描述
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="path" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					处理推送业务的目标地址
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="needsubscribed" type="fh:booleanType">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					是否需要订阅
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+	<xsd:simpleType name="booleanType">
+	   <xsd:restriction  base="xsd:string">
+	      <xsd:enumeration value="true" />
+	      <xsd:enumeration value="false" />
+	   </xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="sessionTypeE">
+	   <xsd:restriction  base="xsd:string">
+	   	  <xsd:enumeration value="stateless" />
+	      <xsd:enumeration value="stateful" />
+	   </xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="levelType">
+	   <xsd:restriction  base="xsd:string">
+	   	  <xsd:enumeration value="debug" />
+	      <xsd:enumeration value="info" />
+	      <xsd:enumeration value="error" />
+	   </xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="cronType" mixed="true">
+		<xsd:annotation>
+			<xsd:documentation>
+				推送调度策略
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="starttime" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					推送调度开始时间
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="endtime" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					推送调度结束时间
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<!-- 调度参数 -->
+	<xsd:complexType name="paramtersType" mixed="true">
+		<xsd:annotation>
+			<xsd:documentation>
+				推送调度参数
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:any processContents="skip"  minOccurs="0" maxOccurs="unbounded">
+			</xsd:any>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- 应用配置节点 -->
+	<xsd:complexType name="configType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="zh">
+				应用配置
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:group ref="fh:configGroup"  maxOccurs="unbounded" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- 配置组 -->
+	<xsd:group name="configGroup">
+		<xsd:choice>
+			<xsd:element name="database" type="fh:databaseType" maxOccurs="unbounded" minOccurs="0" />
+			<xsd:element name="timer" type="fh:timerType" maxOccurs="unbounded" minOccurs="0" />
+			<xsd:element name="mimetype" type="fh:mimetypeType" maxOccurs="unbounded" minOccurs="0" />
+			<xsd:element name="proxy" type="fh:proxyType" maxOccurs="1" minOccurs="0" />
+			<xsd:element name="domain" type="fh:domainType" maxOccurs="unbounded" minOccurs="0" />
+			<xsd:element name="customparam" type="fh:customParamType" maxOccurs="unbounded" minOccurs="0" />
+			<xsd:element name="session" type="fh:sessionType"  maxOccurs="1" minOccurs="0" />
+			<xsd:element name="httpdefaultcharset" type="fh:httpdefaultcharsetType"  maxOccurs="1" minOccurs="0" />
+			<xsd:element name="httppushrsp" type="fh:httppushrspType"  maxOccurs="1" minOccurs="0" />
+			<xsd:element name="cachepolicy" type="fh:cacheType"  maxOccurs="1" minOccurs="0" />
+			<xsd:element name="applogconfig" type="fh:logType"  maxOccurs="1" minOccurs="0" />
+			<xsd:element name="apptimeout" type="fh:appTimeOutType"  maxOccurs="1" minOccurs="0" />
+			<xsd:element name="httpservicetimeout" type="fh:httpServiceTimeoutType"  maxOccurs="1" minOccurs="0" />
+			<xsd:element name="sessiontimeout" type="fh:sessionTimeOutType"  maxOccurs="1" minOccurs="0" />
+			<xsd:element name="htmlformat" type="fh:htmlformatType"  maxOccurs="1" minOccurs="0" />
+			<xsd:element name="filepreviewconfig" type="fh:filepreviewconfigType"  maxOccurs="1" minOccurs="0" />
+		</xsd:choice>
+	</xsd:group>
+	
+	
+	
+	<!-- 数据库配置节点 -->
+	<xsd:complexType name="databaseType">
+		<xsd:annotation>
+			<xsd:documentation>
+				数据库配置
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="id" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					数据库唯一标识
+					</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="driver" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					数据库使用驱动
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attributeGroup ref="fh:urlGroup"/>
+		<xsd:attribute name="url" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					数据库的连接地址
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="user" type="xsd:string" use="required" >
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					数据库用户名
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="password" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					数据库密码
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="maxconn" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					最大连接数
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="minconn" type="xsd:int" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					最小连接数
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="defconn" type="xsd:int" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					默认连接数
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="heartsql" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					心跳sql语句
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+	<xsd:attributeGroup name="urlGroup">
+		<xsd:attribute name="ip" type="xsd:string" use="optional" >
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					数据库的连接ip地址
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="port" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					数据库的连接端口号
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="dbname" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					数据库名
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="dbtype" type="fh:dbType" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					数据库类型
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:attributeGroup>
+	
+	<xsd:simpleType name="dbType">
+	   <xsd:restriction  base="xsd:string">
+	      <xsd:enumeration value="oracle" />
+	      <xsd:enumeration value="mysql" />
+	      <xsd:enumeration value="postgresql" />
+	      <xsd:enumeration value="db2" />
+	      <xsd:enumeration value="mssqlserver" />
+	   </xsd:restriction>
+	</xsd:simpleType>
+	
+	
+	<!-- 定时器配置节点 -->
+	<xsd:complexType name="timerType">
+		<xsd:annotation>
+			<xsd:documentation>
+				定时器配置
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="starttime" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>
+					定时器开始时间
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="endtime" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>
+					定时器结束时间
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="delay" type="xsd:int">
+			<xsd:annotation>
+				<xsd:documentation>
+					定时器延时执行时间（单位：分钟）
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="period" type="xsd:int" use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+					定时器间隔执行时间（单位：分钟）
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="path" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+					执行任务目标地址
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="scope" type="fh:timerAttrScope" use="optional">
+				<xsd:annotation>
+					<xsd:documentation>
+						定时器类型，user表示用户级定时器，app表示应用级定时器，缺省值为：user
+					</xsd:documentation>
+				</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+	<xsd:simpleType name="timerAttrScope">
+		<xsd:restriction  base="xsd:string">
+	       <xsd:enumeration value="user" />
+	       <xsd:enumeration value="app" />
+  		 </xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="mimetypeType">
+		<xsd:annotation>
+			<xsd:documentation>
+				多媒体配置
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="contenttype" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+					文档数据类型
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="extension" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+					文档扩展名
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="proxyType">
+		<xsd:annotation>
+			<xsd:documentation>
+				代理服务配置
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="ip" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+					代理服务IP地址
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="port" type="xsd:int" use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+					代理服务端口号
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="username" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					用户名
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="password" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					密码
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+	<xsd:complexType name="domainType">
+		<xsd:annotation>
+			<xsd:documentation>
+				自定义域名配置
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="name"  use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+					自定义域名
+				</xsd:documentation>
+			</xsd:annotation>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:pattern value="[A-Za-z0-9_\.\-]+" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="address" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+					服务实际地址
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>	
+	
+	
+	<xsd:complexType name="customParamType">
+		<xsd:annotation>
+			<xsd:documentation>
+				自定义参数配置
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="name"  use="required" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>
+					自定义参数名称
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="value" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+					自定义参数值
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>	
+	
+	
+	<xsd:complexType name="sessionType">
+		<xsd:attribute name="type" type="fh:sessionTypeE" use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+					session状态
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+	<xsd:complexType name="httpdefaultcharsetType">
+		<xsd:attribute name="reqcharset" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					http全局请求字符集
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="rspcharset" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					http全局响应字符集
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+	<xsd:complexType name="httppushrspType">
+		<xsd:attribute name="restrainrsp" type="fh:booleanType" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					http推送响应全局配置
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+	<xsd:complexType name="cacheType">
+		<xsd:attribute name="preview" type="fh:booleanType">
+			<xsd:annotation>
+				<xsd:documentation>
+					下载缓存是否有效
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="download" type="fh:booleanType">
+			<xsd:annotation>
+				<xsd:documentation>
+					预览缓存是否有效
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="days" type="xsd:int">
+			<xsd:annotation>
+				<xsd:documentation>
+					应用级缓存有效时间 单位：天
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+	
+	<xsd:complexType name="logType">
+		<xsd:attribute name="threshold" type="fh:levelType">
+			<xsd:annotation>
+				<xsd:documentation>
+					日志级别
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="maxfilesize" type="xsd:int">
+			<xsd:annotation>
+				<xsd:documentation>
+					日志单个文件大小 单位：M
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="maxbackupindex" type="xsd:int">
+			<xsd:annotation>
+				<xsd:documentation>
+					日志保留文件数目
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+	
+	<xsd:complexType name="appTimeOutType">
+		<xsd:attribute name="appexpireminute" type="xsd:int" use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+					会话过期时间，单位：分钟。
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+	<xsd:complexType name="httpServiceTimeoutType">
+		<xsd:attribute name="path" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					会话超时的jsp路径
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+	<xsd:complexType name="sessionTimeOutType">
+		<xsd:attribute name="clientapppath" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					客户端会话超时的jsp路径
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		
+		<xsd:attribute name="webapppath" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					WEB会话超时的jsp路径
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+	
+	<xsd:complexType name="ServiceType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="zh">
+				应用服务节点
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+	         <xsd:group ref="fh:ServiceGroup"  minOccurs="0" maxOccurs="unbounded"/>
+	      </xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:group name="ServiceGroup">
+		 <xsd:choice>
+			<xsd:element name="http-service" type="fh:httpServiceType" maxOccurs="1" minOccurs="0" >
+			</xsd:element>
+			<xsd:element name="ws-service" type="fh:ws-serviceType" maxOccurs="1" minOccurs="0" >
+			</xsd:element>
+			<xsd:element name="http-filter" type="fh:httpServiceFilterType" maxOccurs="unbounded" minOccurs="0" >
+			</xsd:element>
+			<xsd:element name="http-service-ext" type="fh:httpServiceExtType" maxOccurs="unbounded" minOccurs="0" >
+			</xsd:element>
+		</xsd:choice>
+	</xsd:group>
+	
+	<!-- httpservice -->
+	<xsd:complexType name="httpServiceType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="zh">
+				httpservice配置
+			</xsd:documentation>
+		</xsd:annotation>
+	      <xsd:sequence>
+	        <xsd:element maxOccurs="unbounded" ref="fh:forward"/>
+	      </xsd:sequence>
+	  <xsd:attribute name="desc" type="xsd:string"/>
+      <xsd:attribute name="id" type="xsd:string"/>
+      <xsd:attribute name="name" type="xsd:string"/>
+      <xsd:attribute name="isrest" type="xsd:boolean"/>
+	</xsd:complexType>
+	
+	<xsd:complexType name="httpServiceFilterType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="zh">
+				httpServiceFilter配置
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="url-pattern" type="xsd:string" maxOccurs="unbounded" minOccurs="1" >
+				
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="name" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					过滤器名称
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="file" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					过滤器地址
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+	<xsd:complexType name="httpServiceExtType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="zh">
+				httpServiceExt配置
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="extfile" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					扩展指向的文件
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	  
+  <xsd:element name="forward">
+    <xsd:complexType>
+      <xsd:all>
+        <xsd:element ref="fh:params" maxOccurs="1" minOccurs="0"/>
+        <xsd:element ref="fh:headers" maxOccurs="1" minOccurs="0"/>
+        <xsd:element ref="fh:content" maxOccurs="1" minOccurs="0"/>
+        <xsd:element ref="fh:succrsp" maxOccurs="1" minOccurs="0"/>
+        <xsd:element ref="fh:failrsp" maxOccurs="1" minOccurs="0"/>
+        <xsd:element ref="fh:memo" maxOccurs="1" minOccurs="0"/>
+      </xsd:all>
+      <xsd:attribute name="desc" type="xsd:string"/>
+      <xsd:attribute name="method" type="xsd:string"/>
+      <xsd:attribute name="name" type="xsd:string"/>
+      <xsd:attribute name="path" use="required"/>
+      <xsd:attribute name="pattern" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="params">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element maxOccurs="unbounded" ref="fh:param"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="param">
+    <xsd:complexType>
+      <xsd:attribute name="desc"  type="xsd:string"/>
+      <xsd:attribute name="name" use="required" type="xsd:string"/>
+      <xsd:attribute name="required" use="required" type="xsd:boolean"/>
+      <xsd:attribute name="type" use="required" type="xsd:string"/>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="headers">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element maxOccurs="unbounded" ref="fh:header"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="header">
+    <xsd:complexType>
+      <xsd:attribute name="desc" type="xsd:string"/>
+      <xsd:attribute name="name" use="required" type="xsd:string"/>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="content" type="xsd:string"/>
+  <xsd:element name="succrsp" type="xsd:string"/>
+  <xsd:element name="failrsp" type="xsd:string"/>
+  <xsd:element name="memo" type="xsd:string"/>
+	
+	
+	<xsd:complexType name="ws-serviceType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="zh">
+				ws-service配置
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="wsservice" type="fh:wsserviceType" maxOccurs="unbounded" minOccurs="0" >
+				
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- wsservice -->
+	<xsd:complexType name="wsserviceType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="zh">
+				wsservice配置
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="interface" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					接口名称
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="operation" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					方法名称
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="path" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					触发的jsp路径
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+	<!-- htmlformat -->
+	<xsd:complexType name="htmlformatType">
+		<xsd:attribute name="wellformat" type="xsd:boolean" use="optional"
+			default="false">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					是否做格式规范化
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+	<!-- filepreviewconfig -->
+	<xsd:complexType name="filepreviewconfigType">
+		<xsd:attribute name="wordtohtml" type="xsd:boolean" use="optional"
+			default="false">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="zh">
+					当前应用中word文档是否采用转换成html格式预览
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+</xsd:schema>

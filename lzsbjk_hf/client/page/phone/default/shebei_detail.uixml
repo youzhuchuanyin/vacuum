@@ -1,0 +1,114 @@
+<!-- ExMobi UIXML(XHTML)文件 -->
+<html>
+	<head>
+		<meta content="charset=utf-8"/>
+		<title show="false"/>
+		<link rel="stylesheet" type="text/css" href="res:css/global.css" />
+		<script src="res:script/exmobijs/app.js"/>
+		<script src="res:script/exmobijs/base.js"/>
+        <script src="res:script/exmobijs/utility.js"/>
+        <script src="res:script/exmobijs/date.js"/>
+<script>
+	<![CDATA[
+	//var progressbarObj = new ProgressBar();
+	var equipment_code = window.getParameter("EQUIPMENT_CODE");//从shebei_list.uixml中传过来的
+	var box_code = window.getParameter("BOX_CODE");//从shebei_list.uixml中传过来的
+	var userFullCode = window.getStringSession("userFullCode");
+	function init() {
+		//$("main").innerHTML("");
+		//var titlebarObj = document.getElementById("titlebarid");
+		//titlebarObj.title="设备详情;
+		getDetail(equipment_code,box_code);
+	}
+
+	/*获取设备详情*/
+	function getDetail(equipment_code,box_code) {
+		//progressbarObj.setMessage("获取中...");
+		//progressbarObj.show();
+		data = "flag=detail&equipmentCode=" +equipment_code+"&boxCode=" +box_code ;
+		$a.go("http://10.40.121.66:9999/com/appapi.jsp", "post", data, getDetail_success, failFunction, '{"Content-Type":"application/x-www-form-urlencoded; charset=utf-8","Accept-Language":"zh-cn"}', false);
+	}
+
+	function getDetail_success(data) {
+		//progressbarObj.cancel();
+		//$("maindiv").innerHTML("");
+		//var innerHtml='';
+		var content = eval("(" + data.responseText + ")");
+		if (content.length > 0) {
+			for ( i = 0; i < content.length; i++) {
+				var status = content[i].STATUS;
+				if(status =="0"){status ="新增";}
+				else if (status =="1"){status ="运行";}
+				else {status ="结束";}
+				//写到input输入框中去
+				$("Equipmentcode").val(content[i].EQUIPMENT_CODE);
+				$("Boxcode").val(content[i].BOX_CODE);
+				$("Workprocedure").val(content[i].WORK_PROCEDURE);
+				$("Starttime").val(content[i].START_TIME);
+				$("Endtime").val(content[i].END_TIME);
+				$("STatus").val(status);
+				$("Operatorname").val(content[i].OPERATOR_NAME);
+				//innerHtml+='<div id="Equipment_code" style="display: inline;width:30%;">设备编码：</div>';
+	        	//innerHtml+="<input type="text" style="width:70%" hideborder="false"  id="Equipment_code" value ='" + content[i].EQUIPMENT_CODE + "'></input>"
+	        	//innerHtml+="<div id="Box_Code" style="display: inline;width:30%;">罐箱编码：</div>";
+	        	//innerHtml+="<input type="text" style="width:70%" hideborder="false"  id="Box_Code" value ='" + content[i].BOX_CODE + "'></input>";
+	        	//innerHtml+='<div id="Work_procedure" style="display: inline;width:30%;">工     序：</div>';
+	        	//innerHtml+="<input type="text" style="width:70%" hideborder="false"  id="Work_procedure" value ='" + content[i].WORK_PROCEDURE + "'></input>";
+	        	//innerHtml+='<div id="Start_time" style="display: inline;width:30%;">开始时间：</div>';
+	        	//innerHtml+="<input type="text" style="width:70%" hideborder="false"  id="Start_time" value ='" + content[i].START_TIME + "'></input>";
+	        	//innerHtml+='<div id="End_time" style="display: inline;width:30%;">结束时间：</div>';
+	        	//innerHtml+="<input type="text" style="width:70%" hideborder="false"  id="End_time" value ='" + content[i].END_TIME + "'></input>";
+	        	//innerHtml+='<div id="End_time" style="display: inline;width:30%;">结束时间：</div>';
+	        	//innerHtml+="<input type="text" style="width:70%" hideborder="false"  id="End_time" value ='" + content[i].END_TIME + "'></input>";
+	        	//innerHtml+='<div id="Status" style="display: inline;width:30%;">状     态：</div>';
+	        	//innerHtml+="<input type="text" style="width:70%" hideborder="false"  id="Status" value ='" + content[i].STATUS + "'></input>";
+	        	//innerHtml+='<div id="Operator_name" style="display: inline;width:30%;">状     态：</div>';
+	        	//innerHtml+="<input type="text" style="width:70%" hideborder="false"  id="Operator_name" value ='" + content[i].OPERATOR_NAME + "'></input>";
+	       }
+	        	//$("maindiv").innerHTML = innerHtml;
+		} else {
+			$("maindiv").innerHTML = '无数据';
+		}
+	}
+
+	function failFunction(data) {
+		//progressbarObj.cancel();
+		alert("服务器异常，请求数据失败。");
+	}
+	]]>
+		</script>
+	</head>
+	<header>
+		<titlebar id="titlebarid" title="活动详情" iconhref="script:close" hidericon="true"/>
+	</header>
+	<body onload="init()">
+		<meta content="charset=UTF-8"/>
+	   <div id="maindiv"></div>
+	   <div id="Equipment_code" style="display: inline;width:30%;">设备编码：</div>
+		  <input type="text" style="width:70%" hideborder="false"  id="Equipmentcode" ></input>
+       <br/>
+       <div id="Box_code" style="display: inline;width:30%;">罐箱编码：</div>
+          <input type="text" style="width:70%" hideborder="false"  id="Boxcode" ></input>
+       <br/>
+       <div id="Work_procedure" style="display: inline;width:30%;">工      序：</div>
+	     <input type="text" style="width:70%" hideborder="false"  id="Workprocedure" ></input>
+       <br/>
+       <div id="Start_time" style="display: inline;width:30%;">开始时间：</div>
+	     <input type="text" style="width:70%" hideborder="false"  id="Starttime" ></input>
+       <br/>
+       <div id="End_time" style="display: inline;width:30%;">结束时间：</div>
+	     <input type="text" style="width:70%" hideborder="false"  id="Endtime" ></input>
+       <br/>
+       <div id="Status" style="display: inline;width:30%;">状     态：</div>
+	     <input type="text" style="width:70%" hideborder="false"  id="STatus" ></input>
+       <br/>
+       <div id="Operator_name" style="display: inline;width:30%;">操作人员：</div>
+	     <input type="text" style="width:70%" hideborder="false"  id="Operatorname" ></input>
+       <br/>   
+	</body>
+
+	<footer>
+          <input type="submit" value="修改保存" onclick="editActivity()" style="width:60%;align:center;"></input>
+    </footer>
+
+</html>

@@ -1,0 +1,108 @@
+<!-- ExMobi UIXML(XHTML)文件 -->
+<html>
+	<head>
+		<meta content="charset=utf-8"/>
+		<title show="false"/>
+		<link rel="stylesheet" type="text/css" href="res:css/global.css" />
+		<script src="res:script/exmobijs/app.js"/>
+		<script src="res:script/exmobijs/base.js"/>
+        <script src="res:script/exmobijs/utility.js"/>
+        <script src="res:script/exmobijs/date.js"/>
+<script>
+	<![CDATA[
+	var progressbarObj = new ProgressBar();//进度条
+	var userFullCode = window.getStringSession("userFullCode");
+		//12位工号
+	function init() {
+		$("main").html("");
+		getList();
+	}
+
+	/*获取活动列表*/
+	function getList() {
+		var startDate = $("startDate").val();
+		var endDate = $("endDate").val();
+		if (startDate == "") {
+			startDate = $d.getDate().substr(0, 7);
+			endDate = $d.getDate().substr(0, 7);
+		}
+		progressbarObj.setMessage("获取中...");
+		progressbarObj.show();
+		data = "flag=query&operatorCode=" + userFullCode ;
+		$a.go("http://erpserver/com/appapi.jsp", "post", data, getList_success, failFunction, '{"Content-Type":"application/x-www-form-urlencoded; charset=utf-8","Accept-Language":"zh-cn"}', false);
+	}
+
+	function getList_success(data) {
+		progressbarObj.cancel();
+		$("main").html("");
+		var content = eval("(" + data.responseText + ")");
+		if (content.length > 0) {
+			for ( i = 0; i < content.length; i++) {
+				var color = "";
+				var sndcaption11 = "";
+				var equipment_code = content[i].EQUIPMENT_CODE;
+				equipment_code = "设备号:"+ equipment_code;
+				var box_code = content[i].BOX_CODE;
+				box_code = "罐箱号:"+ box_code;
+				var work_procedure = content[i].WORK_PROCEDURE;
+				work_procedure = "工序:"+ work_procedure;
+				var start_time = content[i].START_TIME;
+				start_time = "开始时间:"+ start_time;
+				var status = content[i].STATUS;
+				if(status =="0"){status ="新增";}
+				else if (status =="1"){status ="运行";}
+				else {status ="结束";}
+				status ="状态:"+ status;
+				sndcaption11 =  work_procedure +"                 "+ status;
+				var operator_name = content[i].OPERATOR_NAME;
+				operator_name = "操作人员:"+ operator_name;
+				//$("main").append("<listitem id=\"item" + i + "\" name=\"item" + i + "\" type=\"oneline\"" + " rcaption=\"" + content[i].point_value + "\" caption=\"" + content[i].equipment_code + "            " + content[i].box_code + "\"  href=\"shebei_detail.uixml\"/>");
+				//innerHtml += "<listitem  type='twoline' sndcaption='" + c_week + "'   style='color:" + color + "' href='' caption='" + sign_date + "' rcaption='" + rcaption + "'  class='imgnormal'/>";
+				$("main").append(
+					"<listitem  type='twoline' sndcaption='" + sndcaption11 + "' href='' caption='" + equipment_code + "' rcaption='" + box_code + "' style='color:black;rcolor:black;sndcolor:black'  href=\"javascript:open_detail('" + content[i].EQUIPMENT_CODE + "','"+content[i].BOX_CODE+"')\"/>");
+
+			}
+		} else {
+			$("main").html("无数据");
+		}
+	}
+
+	function failFunction(data) {
+		progressbarObj.cancel();
+		alert("服务器异常，请求数据失败。");
+	}
+//
+	function reSearch() {
+		var dialogObj = document.getElementById("dialogid");
+		dialogObj.show();
+		var date = new Date();
+		document.getElementById("startDate").value = date.toDateString();
+		document.getElementById("endDate").value = date.toDateString();
+
+	}
+	function open_detail(EQUIPMENT_CODE,BOX_CODE) {
+		var params = "EQUIPMENT_CODE=" + EQUIPMENT_CODE +"&BOX_CODE=" + BOX_CODE ;
+		open("res:page/shebei_detail.uixml?" + params);
+	}
+
+	]]>
+		</script>
+	</head>
+	<header>
+		<titlebar title="活动列表" iconhref="script:close" ricon="theme:image/icon/search.png" clickricon="theme:image/icon/search_c.png" riconhref="reSearch()"/>
+	</header>
+	<body onload="init()">
+		<div id="main"></div>
+		
+		
+	</body>
+	<dialogset>
+		<dialog id="dialogid" title="查询条件" oktext="确定" okhref="getList()" canceltext="取消">
+			<font style="width: 40%">开始日期</font>
+			<object type="date" id="startDate"  format="YYYY-MM" style="width:60%" />
+			<br/>
+			<font style="width: 40%">结束日期</font>
+			<object type="date" id="endDate" format="YYYY-MM" style="width:60%" />
+		</dialog>
+	</dialogset>
+</html>

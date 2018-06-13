@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<maxml version="2.0" xmlns="http://www.nj.fiberhome.com.cn/map"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.nj.fiberhome.com.cn/map maxml-2.0.xsd">
+	<config>
+		<htmlformat wellformat="true" />
+		<filepreviewconfig wordtohtml="true" />
+		<!-- 数据源配置 -->
+		<database id="hcmcj" url="jdbc:oracle:thin:@10.40.122.112:1521:orcl"
+			user="hcmdbcenter" password="hcmdbcenter" driver="oracle.jdbc.driver.OracleDriver" />
+		<database id="cjehr" url="jdbc:oracle:thin:@10.40.122.50:1521:cjehr"
+			user="cjehr" password="cj_eh2" driver="oracle.jdbc.driver.OracleDriver" />
+		<database id="cjcserp" url="jdbc:oracle:thin:@172.19.2.163:1521:cjnowerp"
+			user="cjrs10" password="rs10_cj" driver="oracle.jdbc.driver.OracleDriver" />
+		<database id="zc_infor" url="jdbc:oracle:thin:@10.40.121.161:1521:ORCL"
+			user="zc_infor" password="zc_infor" driver="oracle.jdbc.driver.OracleDriver" />
+		<domain address="10.40.121.66:9999" name="erpserver" />
+	</config>
+</maxml>
